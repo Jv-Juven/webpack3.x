@@ -4,12 +4,13 @@
     </div>
 </template>
 <script>
-console.log('主体组件');
 export default {
-    name: 'App',
-    template: '<span>Hello vuejs!</span>'
+    name: 'App'
 }
 </script>
 <style lang="less">
+    .app-container {
+        color: red;
+    }
 </style>
 

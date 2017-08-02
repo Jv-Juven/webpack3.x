@@ -60,7 +60,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "192a8215d46998ef576b"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "823fff62328e529fad9a"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -725,7 +725,7 @@ exports = module.exports = __webpack_require__(7)(undefined);
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "\n.app-container {\n  color: red;\n}\n", ""]);
 
 // exports
 
@@ -11524,10 +11524,8 @@ module.exports = function normalizeComponent (
 //
 //
 
-console.log('主体组件');
 /* harmony default export */ __webpack_exports__["a"] = ({
-    name: 'App',
-    template: '<span>Hello vuejs!</span>'
+    name: 'App'
 });
 
 
