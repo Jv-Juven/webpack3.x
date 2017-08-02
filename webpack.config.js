@@ -15,7 +15,13 @@ module.exports = {
         filename: '[name].bundle.js',
         path: path.resolve(__dirname, 'dist')
     },
-    devtool: 'inline-source-map',
+    resolve: {
+        extensions: ['.js', '.json', '.vue'],
+        alias: {
+            'vue$': 'vue/dist/vue.esm.js'
+        }
+    },
+    // devtool: 'inline-source-map',
     devServer: {
         hot: true, // 告诉 dev-server 我们在使用 HMR
         contentBase: './dist',
@@ -41,6 +47,10 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: ['style-loader', 'css-loader']
+            },
+            {
+                test: /\.vue/,
+                use: ['vue-loader']
             }
         ]
     },
