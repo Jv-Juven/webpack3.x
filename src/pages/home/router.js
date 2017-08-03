@@ -11,6 +11,12 @@ let routes = [
         component(resolve) {
             require(['pages/home/components/about'], resolve)
         }
+    },
+    {
+        path: '/cases',
+        component(resolve) {
+            require(['pages/home/components/cases'], resolve)
+        }
     }
 ];
 

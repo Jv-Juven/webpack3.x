@@ -8,9 +8,9 @@ export default {
     }
 }
 </script>
-<style lang="less" scoped>
-.about {
-    color: blue;
-}
+<style lang="stylus" scoped>
+.about
+    font-size 14px
+    color #455
 </style>
 

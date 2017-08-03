@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 const baseDir = path.resolve(__dirname);
 
@@ -27,10 +28,12 @@ module.exports = {
     devServer: {
         hot: true, // 告诉 dev-server 我们在使用 HMR
         contentBase: './dist',
-        publicPath: '/'
+        publicPath: '/',
+        port: 8008,
+        open: true // 是否打开浏览器
     },
     plugins: [
-        new CleanWebpackPlugin(['dist']),
+        // new CleanWebpackPlugin(['dist']),
         new webpack.HotModuleReplacementPlugin(), // 启用 HMR
         new HtmlWebpackPlugin({
             template: path.resolve(baseDir, 'src/pages/home/home.html'),
@@ -45,7 +48,9 @@ module.exports = {
         }),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'common' // Specify the common bundle's name.
-        })
+        }),
+        // 提取css到独立文件
+        new ExtractTextPlugin('home.css')
     ],
     module: {
         rules: [
@@ -54,8 +59,22 @@ module.exports = {
                 use: ['style-loader', 'css-loader']
             },
             {
-                test: /\.vue/,
-                use: ['vue-loader']
+                test: /\.vue/, // vue-loader配置 https://vue-loader.vuejs.org/zh-cn/
+                use: {
+                    loader: 'vue-loader',
+                    options: {
+                        postcss: [ require('autoprefixer') ],
+                        loaders: {
+                            less: 'vue-style-loader!css-loader!less-loader',
+                            postcss: 'vue-style-loader!css-loader',
+                            css: 'vue-style-loader!css-loader',
+                            stylus: 'vue-style-loader!css-loader!stylus-loader',
+                            styl: 'vue-style-loader!css-loader!stylus-loader'
+                        },
+                        // 提取css到独立文件配置
+                        extractCSS: true
+                    }
+                },
             },
             {
                 test: /\.js$/,
