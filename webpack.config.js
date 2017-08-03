@@ -9,7 +9,7 @@ module.exports = {
     entry: {
         // index: './src/index.js',
         // print: './src/print.js',
-        home: path.resolve(baseDir, 'src/page/home/home.js')
+        home: path.resolve(baseDir, 'src/pages/home/home.js')
     },
     output: {
         filename: '[name].bundle.js',
@@ -18,7 +18,9 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.json', '.vue'],
         alias: {
-            'vue$': 'vue/dist/vue.esm.js'
+            'vue$': 'vue/dist/vue.esm.js',
+            'src': path.resolve(baseDir, 'src'),
+            'pages': path.resolve(baseDir, 'src/pages')
         }
     },
     // devtool: 'inline-source-map',
@@ -31,7 +33,7 @@ module.exports = {
         new CleanWebpackPlugin(['dist']),
         new webpack.HotModuleReplacementPlugin(), // 启用 HMR
         new HtmlWebpackPlugin({
-            template: path.resolve(baseDir, 'src/page/home/home.html'),
+            template: path.resolve(baseDir, 'src/pages/home/home.html'),
             filename: 'home.html'
         }),
         // new webpack.optimize.UglifyJsPlugin({
@@ -40,6 +42,9 @@ module.exports = {
         // }),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify('production')
+        }),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'common' // Specify the common bundle's name.
         })
     ],
     module: {
@@ -51,6 +56,21 @@ module.exports = {
             {
                 test: /\.vue/,
                 use: ['vue-loader']
+            },
+            {
+                test: /\.js$/,
+                exclude: /(node_modules|bower_components)/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['env'],
+                        cacheDirectory: true
+                    }
+                }
+            },
+            {
+                test: /\.json$/,
+                use: 'json-loader'
             }
         ]
     },
