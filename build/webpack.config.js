@@ -2,9 +2,11 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const ExtractTextPlugin = require("extract-text-webpack-plugin")
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
-const baseDir = path.resolve(__dirname);
+
+const baseDir = path.resolve(__dirname, '../');
+const HelloWorldPlugin = require(path.resolve(baseDir, './webpack_plugins/hello-word'));
 
 module.exports = {
     entry: {
@@ -14,7 +16,8 @@ module.exports = {
     },
     output: {
         filename: '[name].bundle.js',
-        path: path.resolve(__dirname, 'dist')
+        chunkFilename: 'chunks/[name].chunk.js',
+        path: path.resolve(baseDir, 'dist')
     },
     resolve: {
         extensions: ['.js', '.json', '.vue'],
@@ -33,7 +36,7 @@ module.exports = {
         open: true // 是否打开浏览器
     },
     plugins: [
-        // new CleanWebpackPlugin(['dist']),
+        new CleanWebpackPlugin(['dist']),
         new webpack.HotModuleReplacementPlugin(), // 启用 HMR
         new HtmlWebpackPlugin({
             template: path.resolve(baseDir, 'src/pages/home/home.html'),
@@ -50,7 +53,9 @@ module.exports = {
             name: 'common' // Specify the common bundle's name.
         }),
         // 提取css到独立文件
-        new ExtractTextPlugin('home.css')
+        new ExtractTextPlugin('home.css'),
+        // 自定义插件
+        new HelloWorldPlugin()
     ],
     module: {
         rules: [
@@ -81,10 +86,10 @@ module.exports = {
                 exclude: /(node_modules|bower_components)/,
                 use: {
                     loader: 'babel-loader',
-                    options: {
-                        presets: ['env'],
-                        cacheDirectory: true
-                    }
+                    // options: {
+                    //     presets: ['env'],
+                    //     cacheDirectory: true
+                    // }
                 }
             },
             {
