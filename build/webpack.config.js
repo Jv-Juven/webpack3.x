@@ -15,8 +15,8 @@ module.exports = {
         home: path.resolve(baseDir, 'src/pages/home/home.js')
     },
     output: {
-        filename: '[name].bundle.js',
-        chunkFilename: 'chunks/[name].chunk.js',
+        filename: 'js/[name].[hash].js',
+        chunkFilename: '[name].[chunkhash].js',
         path: path.resolve(baseDir, 'dist')
     },
     resolve: {
@@ -36,7 +36,11 @@ module.exports = {
         open: true // 是否打开浏览器
     },
     plugins: [
-        new CleanWebpackPlugin(['dist']),
+        new CleanWebpackPlugin(['dist'], {
+            root: baseDir,       　　　　　　　　　　//根目录
+            verbose: true,        　　　　　　　　　　//开启在控制台输出信息
+            dry: false
+        }),
         new webpack.HotModuleReplacementPlugin(), // 启用 HMR
         new HtmlWebpackPlugin({
             template: path.resolve(baseDir, 'src/pages/home/home.html'),
@@ -68,7 +72,7 @@ module.exports = {
                 use: {
                     loader: 'vue-loader',
                     options: {
-                        postcss: [ require('autoprefixer') ],
+                        postcss: [require('autoprefixer')],
                         loaders: {
                             less: 'vue-style-loader!css-loader!less-loader',
                             postcss: 'vue-style-loader!css-loader',

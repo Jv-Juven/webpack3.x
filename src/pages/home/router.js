@@ -36,7 +36,7 @@ let routes = [
         // }
         component: function () {
             import(
-                /* webpackChunkName: "my-chunk-name" */
+                /* webpackChunkName: "tpc/my-chunk-name" */
                 /* webpackMode: "lazy" */
                 'pages/home/components/cases');
         }
