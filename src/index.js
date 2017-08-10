@@ -1,5 +1,8 @@
 import _ from 'lodash';
-import printMe from './print.js';
+// import printMe from './print.js';
+const printMe = require('./print');
+const util1 = require('./util1');
+const util2 = require('./util2');
 
 function component() {
     var element = document.createElement('div');
@@ -9,6 +12,8 @@ function component() {
 
     btn.innerHTML = 'Click me and check the console!';
     btn.onclick = printMe;
+
+    console.log(util1);
 
     element.appendChild(btn);
 
