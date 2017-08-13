@@ -5,27 +5,13 @@ import VueRouter from 'vue-router';
 // 0. 如果使用模块化机制编程，導入Vue和VueRouter，要调用 Vue.use(VueRouter)
 Vue.use(VueRouter);
 
-let asyncComponent = function (path = '', name = '', dependencies = []) {
-    return function (resolve) {
-        require.ensure(dependencies, () => {
-            resolve(require(path));
-        }, name);
-    }
-}
-
-// let fn = function () {
-//     return import(/* webpackChunkName: "my-chunk-name" */
-//         /* webpackMode: "lazy" */
-//         'pages/home/components/cases');
-// }
-
 let routes = [
     {
         path: '/about',
         component: function (resolve) {
             require.ensure([], () => {
                 resolve(require('pages/home/components/about'));
-            }, 'about');
+            }, 'tpc/about');
             // require(['pages/home/components/about'], resolve)
         }
     },
@@ -36,11 +22,20 @@ let routes = [
         // }
         component: function () {
             import(
-                /* webpackChunkName: "tpc/my-chunk-name" */
+                /* webpackChunkName: "tpc/cases" */
                 /* webpackMode: "lazy" */
                 'pages/home/components/cases');
         }
         // component: asyncComponent.call(this, 'pages/home/components/cases', 'cases', [])(resolve)
+    },
+    {
+        path: '/contact',
+        component: function () {
+            import(
+                /* webpackChunkName: "tpc/contact" */
+                /* webpackMode: "lazy" */
+                'pages/home/components/contact');
+        }
     }
 ];
 
