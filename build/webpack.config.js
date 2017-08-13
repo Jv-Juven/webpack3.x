@@ -12,7 +12,10 @@ module.exports = {
     entry: {
         // index: './src/index.js',
         // print: './src/print.js',
-        home: path.resolve(baseDir, 'src/pages/home/home.js')
+        home: path.resolve(baseDir, 'src/pages/home/home.js'),
+        vendor: [
+            'vue'
+        ]
     },
     output: {
         filename: 'js/[name].[hash].js',
@@ -53,9 +56,14 @@ module.exports = {
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify('production')
         }),
+        // new webpack.NamedModulesPlugin(),
+        new webpack.HashedModuleIdsPlugin(), // 与NamedModulesPlugin插件功能一样，但生成的名字比NamedModulesPlugin短很多，建议使用
         new webpack.optimize.CommonsChunkPlugin({
-            name: 'common' // Specify the common bundle's name.
+            name: 'vendor' // Specify the common bundle's name.
         }),
+        new webpack.optimize.CommonsChunkPlugin({
+        name: 'runtime'
+    }),
         // 提取css到独立文件
         new ExtractTextPlugin('home.css'),
         // 自定义插件

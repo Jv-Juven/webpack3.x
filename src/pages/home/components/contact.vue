@@ -1,5 +1,7 @@
 <template>
-	<span></span>
 	<div></div>
 </template>
+<script type="text/javascript">
+
+</script>
 <style lang="less"></style>

@@ -1,5 +1,9 @@
 <template>
-    <div class="about">关于我们的页面</div>
+    <div class="about">
+        <header>
+            关于我们的页面
+        </header>
+    </div>
 </template>
 <script>
 export default {
@@ -14,4 +18,3 @@ export default {
     font-size 14px
     color #455
 </style>
-

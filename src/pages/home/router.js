@@ -28,15 +28,15 @@ let routes = [
         }
         // component: asyncComponent.call(this, 'pages/home/components/cases', 'cases', [])(resolve)
     },
-    {
-        path: '/contact',
-        component: function () {
-            import(
-                /* webpackChunkName: "tpc/contact" */
-                /* webpackMode: "lazy" */
-                'pages/home/components/contact');
-        }
-    }
+    // {
+    //     path: '/contact',
+    //     component: function () {
+    //         import(
+    //             /* webpackChunkName: "tpc/contact" */
+    //             /* webpackMode: "lazy" */
+    //             'pages/home/components/contact');
+    //     }
+    // }
 ];
 
 
