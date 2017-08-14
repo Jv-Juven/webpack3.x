@@ -4,6 +4,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
+const TestPlugin = require('./plugins/testPlugin');
+
 
 const baseDir = path.resolve(__dirname, '../');
 const HelloWorldPlugin = require(path.resolve(baseDir, './webpack_plugins/hello-word'));
@@ -67,7 +69,8 @@ module.exports = {
         // 提取css到独立文件
         new ExtractTextPlugin('home.css'),
         // 自定义插件
-        new HelloWorldPlugin()
+        new HelloWorldPlugin(),
+        new TestPlugin()
     ],
     module: {
         rules: [
